@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 import pandas as pd
+import json
 
 from sklearn import tree
 
@@ -19,8 +20,14 @@ class ModelPrediction:
 def main():
 
 	trainer =  ModelPrediction("./data")
-	predictions = trainer.predict([[0,0,93,60,0,0,35.3,0.263,25]])
-	print(predictions)
+	with open("./tests/test_0.json") as f:
+	    d = json.load(f)
+	    predictions = trainer.predict(d["X"])
+	    print(predictions, d["y"])
+	with open("./tests/test_1.json") as f:
+	    d = json.load(f)
+	    predictions = trainer.predict(d["X"])
+	    print(predictions, d["y"])	
 
 if __name__ == '__main__':
 	main()
